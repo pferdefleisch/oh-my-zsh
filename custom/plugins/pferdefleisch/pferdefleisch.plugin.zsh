@@ -29,6 +29,20 @@ function geo {
   geocode $1 | grep L
 }
 
+function model {
+  cat db/schema.rb | grep "create_table \"$1s\"" -A 1000 | \
+    while read line; do
+      if [ -z "$line" ]
+      then
+        break
+      elif [[ "$line" = "end" || "$line" =~ "create_table" ]]
+      then continue
+      else
+        echo $line
+      fi
+    done
+}
+
 alias t="terminitor"
 alias phpdoc="thor php:open"
 
@@ -74,14 +88,14 @@ alias duh='du -csh'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 alias b="bundle"
-alias bi="bundle install --binstubs --path vendor/bundle --without production"
+alias bi="bundle install --binstubs --without production"
 alias bu="bundle update"
 alias bc="bundle check"
 alias be="bundle exec"
 alias bo="bundle open"
 
 alias migrate="bundle exec rake db:migrate"
-alias deploy="bundle exec rake vlad:deploy"
+alias dpl="bundle exec rake deploy"
 alias easy_deploy="bundle exec rake vlad:easy_deploy"
 
 alias nstart="sudo nginx"
@@ -100,12 +114,29 @@ export ACK_COLOR_MATCH='red'
 gd() { git diff $* | view -; }
 gdc() { gd --cached $*; }
 alias rbgrep="grep --include='*.rb' $*"
-alias r=bin/rails
+alias r="bundle exec rails"
+alias rdbm="bundle exec rake db:migrate db:test:prepare"
+alias rdbr="bundle exec rake db:rollback"
+alias cpl="bundle exec rake assets:precompile"
+alias clean="bundle exec rake assets:clean"
 alias t="script/test $*"
 alias sr="screen -r"
-alias gx="gitx"
-alias gxa="gitx --all"
-alias :q="echo YOU FAIL"
+alias rr='rbenv rehash'
+bindkey "^[[3~" delete-char
+alias start='consular start'
+alias edit='consular edit'
+alias pryr="pry -r ./config/environment -r rails/console/app -r rails/console/helpers"
+alias fs="bundle exec foreman start"
+alias gemspeed='bundle exec ruby -e "$(curl -fsSL https://gist.github.com/raw/2588879/benchmark.rb)" | sort -n -k4'
+
+function routes() {
+  if [ -n "$1" ]; then
+    bundle exec rake routes | grep $1
+  else
+    bundle exec rake routes
+  fi
+}
+
 function cdf() { cd *$1*/ } # stolen from @topfunky
 # Originally from Jonathan Penn, with modifications by Gary Bernhardt
 function whodoneit() {
@@ -115,12 +146,4 @@ function whodoneit() {
         done
     )
 }
-# So gcc works correctly... I hope they fix this
-#CC=/usr/bin/gcc-4.2
-
-alias rr='rbenv rehash'
-bindkey "^[[3~" delete-char
-alias start='consular start'
-alias edit='consular edit'
-alias pryr="pry -r ./config/environment -r rails/console/app -r rails/console/helpers"
-alias fs="bundle exec foreman start"
+alias i="identify"
