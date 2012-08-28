@@ -22,6 +22,10 @@ alias nreload="sudo nginx -s reload"
 alias nstat="sudo lsof -i -P"
 alias p="padrino"
 
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+  z --add "$(pwd -P)"
+}
 function github {
   open "https://github.com/search?q=$1&type=Everything&repo=&langOverride=&start_value=1"
 }
@@ -51,26 +55,22 @@ alias powstart="curl get.pow.cx | sh"
 
 alias g="git"
 alias ports="sudo lsof -i -P"
-export EDITOR="mvim"
+export EDITOR="vim"
 ## terminal color fun
 export CLICOLOR=1
 #export LSCOLORS=caFxCxDxBxegedabagacad
-alias ls='ls -GF'
-alias ll='ls -h1'
-alias lt='ls -lTsSa'
-alias lll='ls'
-alias lsl="ls -lG"
-alias lsla="ls -laG"
+#alias ls='ls -GF'
+#alias ll='ls -h1'
+#alias lt='ls -lTsSa'
+#alias lll='ls'
+#alias lsl="ls -lG"
+#alias lsla="ls -laG"
 alias shortcuts="bind -P | less"
 
 alias nodedoc="open /usr/local/src/nodejs_all/node-v0.3.0/doc/api.html"
 
-alias sb="staticmatic build ."
-alias sp="staticmatic preview ."
-
-alias v.="vim ."
-alias m="mate"
-alias m.="mvim ."
+alias v="vim ."
+alias m="mvim ."
 alias s.="open -a 'Sublime Text 2' ."
 alias s="open -a 'Sublime Text 2'"
 # Git tab completion
