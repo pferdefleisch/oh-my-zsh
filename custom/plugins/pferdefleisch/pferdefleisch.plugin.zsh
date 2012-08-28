@@ -82,8 +82,6 @@ export PATH="$PATH:~/.gem/ruby/1.8/bin"
 
 # Unbreak broken, non-colored terminal
 export TERM='xterm-color'
-alias ls='ls -G'
-alias ll='ls -lG'
 alias duh='du -csh'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
