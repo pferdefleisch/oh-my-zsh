@@ -22,7 +22,7 @@ alias nreload="sudo nginx -s reload"
 alias nstat="sudo lsof -i -P"
 alias p="padrino"
 
-. `brew --prefix`/etc/profile.d/z.sh
+. $HOME/.dotfiles/tools/z/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }
