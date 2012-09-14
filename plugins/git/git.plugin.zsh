@@ -33,6 +33,7 @@ compdef _git glgg=git-log
 alias gss='git status -s'
 compdef _git gss=git-status
 alias ga='git add'
+alias gaa='git add --all'
 compdef _git ga=git-add
 alias gm='git merge'
 compdef _git gm=git-merge
