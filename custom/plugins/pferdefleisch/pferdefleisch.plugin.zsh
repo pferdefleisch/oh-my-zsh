@@ -63,13 +63,17 @@ alias migrate="bundle exec rake db:migrate"
 alias dpl="bundle exec rake deploy"
 alias easy_deploy="bundle exec rake vlad:easy_deploy"
 
-alias nstart="sudo nginx"
-alias nreload="sudo nginx -s reload"
+alias nsta="sudo nginx"
+alias nsto="sudo nginx -s stop"
+alias nres="sudo nginx -s reload"
+alias ntest="sudo nginx -t $*"
 
 alias rbgrep="grep --include='*.rb' $*"
 alias r="bundle exec rails"
 alias rdbm="bundle exec rake db:migrate db:test:prepare"
 alias rdbr="bundle exec rake db:rollback"
+
+alias uni="bundle exec unicorn -p 3000"
 
 alias rr='rbenv rehash'
 
